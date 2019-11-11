@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+
+<script> 
+	var canvas = document.querySelector("#myCanvas"); 
+	canvas.height = window.innerHeight*.8;
+	canvas.width = window.innerWidth*.8;
+	var ctx = canvas.getContext("2d");
+	var color = 'purple'
+	var color_picker = document.querySelector('#picker');
+	var draw = true;
+
+
+	function draw(posX, posY){
+		console.log("currently drawing")
+	if (draw == true){
+		console.log(posX)
+		console.log(posY)
+		ctx.fillStyle = color;
+		ctx.beginPath();
+		ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+		// ask in office hours about arc size
+		ctx.fill();
+		}
+		
+	}
+	myCanvas.addEventListener('mousemove', function (e){
+		console.log(e.x);
+		console.log(e.y);
+		draw(e.x, e.y);
+	})
+
+	window.addEventListener('keydown', function (e){
+		console.log(e);
+		if (e.keyCode == 71) {
+			color = "green"
+			console.log('this')
+		} else if (e.keyCode == 82) {
+			color = "red"
+			console.log('this')
+		} else if (e.keyCode == 89) {
+			color = 'yellow'
+			console.log('this')
+		} else if (e.keyCode == 66) {
+			color = 'blue'
+			console.log('this')
+		} else if (e.keyCode == 38) {
+			draw = false;
+			console.log('Pen not drawing')
+		} else if (e.keyCode == 40) {
+			draw = true;
+			console.log('Pen drawing')
+		}
+	}
+)
+
+	window.addEventListener(
+		"keydown", function(e){
+			console.log(e);
+			if (e.keyCode == 32){
+				ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+				console.log(this)
+			}
+		}
+	)
+
+
+	window.addEventListener('change', function (e){
+		color = color_picker.value;
+		ctx.fillStyle = color;
+		console.log('pick color')
+	}
+)
+
+</script>
+</body>
+
+</html>
