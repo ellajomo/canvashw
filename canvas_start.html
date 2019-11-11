@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <script type="text/javascript">
+    	var canvas = document.querySelector("#myCanvas");
+    	var ctx = canvas.getContext("2d");
+    	canvas.width = window.innerWidth * .8;
+    	canvas.height = window.innerHeight * .8;
+    	var color = 'black';
+    	// can i just use the line below instead? test after
+    	// ctx.fillStyle = "#00ff00";
+    	ctx.fillStyle = color;
+    	var pendrawing = true;
+
+    	function draw(posX, posY){
+    		console.log("drawing");
+    		if (pendrawing == true){
+    			ctx.beginPath();
+    			ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+    			ctx.fill();
+    		}
+    	}
+
+    	function pencolor(e){
+    		if (e.keyCode == 40){
+    			console.log(e.keyCode);
+    			pendrawing = 'true';
+    		}
+    		if (e.keyCode == 38){
+    			console.log(e.keyCode);
+    			pendrawing = 'false';
+    		}
+    		if (e.keyCode == 89){
+    			console.log('drawing yellow');
+    			ctx.fillStyle = 'yellow';
+    		}
+    		if (e.keyCode == 82){
+    			console.log('drawing red');
+    			ctx.fillStyle = 'red';
+    		}
+    		if (e.keyCode == 66){
+    			console.log('drawing blue');
+    			ctx.fillStyle = 'blue';
+    		}
+    		if (e.keyCode == 89){
+    			console.log('drawing yellow');
+    			ctx.fillStyle = 'yellow';
+    		}
+    		if (e.keyCode == 32){
+    			console.log('canvas cleared');
+    			ctx.clearRect(0, 0, canvas.width, canvas.height);
+    		}
+    		if (e.keyCode == 89){
+    			console.log('drawing yellow');
+    			ctx.fillStyle = 'yellow';
+    		}
+    	}
+
+    	window.addEventListener('keydown', funciton(e){
+    		console.log(e.keyCode);
+    		pencolor(e);
+    	})
+    	canvas.addEventListener('mousemove', function(e){
+    		draw(e.x, e.y)
+    	})
+
+
+
+    	// ctx.fillRect(50,50,150,75);
+    	// ctx.fill();
+    </script>
+    <input type = "color" id = "picker"/>
+</body>
+</html>
